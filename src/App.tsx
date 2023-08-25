@@ -9,12 +9,14 @@ type SoundGroupProps = {
 }
 
 const SoundGroup = ({label, soundFiles, prefix}: SoundGroupProps) => {
-    const runningSongs = useRef<Map<string, HTMLAudioElement>>(new Map<string, HTMLAudioElement>());
+    const runningSongs = useRef<Array<HTMLAudioElement>>([]);
 
     const play = (file: string) => {
         const audio = new Audio(`/sound/${file}`);
-        audio.addEventListener('ended', () => runningSongs.current.delete(file));
-        runningSongs.current.set(file, audio);
+        audio.addEventListener('ended', () => {
+            runningSongs.current = runningSongs.current.filter(snd => snd !== audio);
+        });
+        runningSongs.current.push(audio);
         void audio.play();
     }
 

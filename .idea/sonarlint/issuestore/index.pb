@@ -11,3 +11,5 @@ D
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 @
 src/soundlist.js,b\0\b0db650a48dca8963060dd39b97d8d3453ac3e0d
+G
+src/media/Mute_Icon.svg,4\6\465d99d8d5aa78a4c12460141a0e4cc3901fc414
