@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import './App.css';
 import MuteIcon from './media/Mute_Icon.svg';
 
@@ -9,22 +9,23 @@ type SoundGroupProps = {
 }
 
 const SoundGroup = ({label, soundFiles, prefix}: SoundGroupProps) => {
-    const runningSongs = useRef<Array<HTMLAudioElement>>([]);
+    const [runningSounds, setRunningSounds] = React.useState<Array<HTMLAudioElement>>([]);
 
     const play = (file: string) => {
         const audio = new Audio(`/sound/${file}`);
         audio.addEventListener('ended', () => {
-            runningSongs.current = runningSongs.current.filter(snd => snd !== audio);
+            setRunningSounds((prev) => prev.filter(snd => snd !== audio));
         });
-        runningSongs.current.push(audio);
+        setRunningSounds([...runningSounds, audio]);
         void audio.play();
     }
 
     const silence = () => {
-        runningSongs.current.forEach((audio: HTMLAudioElement) => {
+        runningSounds.forEach((audio: HTMLAudioElement) => {
             audio.pause();
             audio.remove();
         });
+        setRunningSounds([]);
     }
 
     const filteredFiles = prefix ? soundFiles.filter(snd => snd.startsWith(prefix)) : soundFiles;
@@ -32,7 +33,9 @@ const SoundGroup = ({label, soundFiles, prefix}: SoundGroupProps) => {
     return (
         <div className="soundGroup">
             <h2>{label}</h2>
-            <img src={MuteIcon} alt='Silence' title='Silence' onClick={silence} className={'mute-icon'}/>
+            {runningSounds.length >
+             0 &&
+             <img src={MuteIcon} alt='Silence' title='Silence' onClick={silence} className={'mute-icon'}/>}
             <div className="buttons">
                 {filteredFiles.map((sound: string) => {
                     return <button key={sound} onClick={() => play(sound)}>
