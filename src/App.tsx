@@ -54,9 +54,17 @@ const App = () => {
     return (
         <div className="App">
             <SoundGroup soundFiles={soundFileNames} prefix={'fraller'} label={'Fraller'}/>
+            <SoundGroup soundFiles={soundFileNames} prefix={'jerry'} label={'Jerry B. Anderson'}/>
+            <SoundGroup soundFiles={soundFileNames} prefix={'abdi'} label={'Gilette Abdi'}/>
+            <SoundGroup soundFiles={soundFileNames} prefix={'fmj'} label={'Full Metal Jacket'}/>
+            <SoundGroup soundFiles={soundFileNames} prefix={'gutis'} label={'Gut\'is'}/>
             <SoundGroup
                 soundFiles={soundFileNames.filter(snd => !snd.startsWith('fantasy') &&
                                                          !snd.startsWith('fraller') &&
+                                                         !snd.startsWith('abdi') &&
+                                                         !snd.startsWith('jerry') &&
+                                                         !snd.startsWith('fmj') &&
+                                                         !snd.startsWith('gutis') &&
                                                          !snd.startsWith('long'))}
                 label={'Shorts'}/>
             <SoundGroup soundFiles={soundFileNames} prefix={'fantasy'} label={'Fantasy'}/>
