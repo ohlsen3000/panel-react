@@ -24,4 +24,10 @@ npm start
 
 ### Run
 
-        docker run -p 3000:3000 ohlsen3000/panel-react:0.1  
+#### Lokal
+
+        docker run -p 7777:80 ohlsen3000/panel-react:0.1 
+
+#### Remote
+
+        docker run -it --rm -d -p 8888:80 --name panel-react ohlsen3000/panel-react:0.1 
