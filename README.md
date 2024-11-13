@@ -3,6 +3,7 @@
 ## Build
 
 ```
+nom install
 npm run build
 ```
 
